@@ -1,173 +1,26 @@
-# #!MANAGED-CONFIG https://raw.githubusercontent.com/ydzydzydz/Rules/master/Surge/conf/zhuangzhuang/zhuangzhuang.conf interval=86400
-
-
-
-
-
-#===============================================================================
-# 如果需要托管本配置，请删掉第一行的注释『第一个#+空格』，托管配置24h更新一次
-# Surge配置详解：https://zhuangzhuang.cf/2018-11-14/surge/
-# 使用前须在 iCloud云盘/Surge/resources/policy 文件夹内创建 auto.list 和 all.list 
-# 使用前需更新外部资源，本地文件建议放在 Dropbox
-# 壮壮不维护规则和脚本，所有规则和脚本都有出处
-# 如果无法打开 GitHub，删掉主机名 github.com, gist.github.com
-#===============================================================================
-
-
-
-#===============================================================================
-
-# 高级设置
 [General]
-
-// Auto
-# 日志等级: warning, notify, info, verbose (默认值: notify)
+# warning, notify, info, verbose
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local
+bypass-tun = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12
 loglevel = notify
-
-# 强制使用特定的DNS服务器
-dns-server = system,1.1.1.1,1.0.0.1,1.2.4.8,223.5.5.5,223.6.6.6,114.114.114.114,119.29.29.29,117.50.10.10
-
-# 跳过某个域名或者IP段
-skip-proxy = 127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,100.64.0.0/10,17.0.0.0/8,localhost,*.local,*.crashlytics.com
-
-# 允许外部控制器访问Surge
-external-controller-access = zz@0.0.0.0:12345
-
-# Surge 作为 HTTP/SOCKS5 代理服务器向 Wi-Fi 网络下的其他设备提供服务器
-allow-wifi-access = true
-
-
-
-// macOS
-interface = 0.0.0.0
-socks-interface = 0.0.0.0
-
-# HTTP 代理服务端口 (默认值: 6152)   (Mac版)
-port = 8888
-
-# SOCKS5 代理服务端口 (默认值: 6153) (Mac版)
-socks-port = 8889
-
-enhanced-mode-by-rule = false
-show-error-page-for-reject = true
-
-
-
-// iOS
-# HTTP 代理服务端口 (默认值: 6152)   (iOS版)
-wifi-access-http-port = 8888
-
-# SOCKS5 代理服务端口 (默认值: 6152) (iOS版)
-wifi-access-socks5-port = 8889
-
-
-
-// Auto
-# 兼容模式：禁用、Proxy with Loopback Address、Proxy Only、TUN Only（0、1、2、3）
-compatibility-mode = 0
-
-# 不包括简单主机名
-exclude-simple-hostnames = true
-
-# 是否启动完整的 IPv6 支持 (默认值: false)
-ipv6 = true
-
-replica = false
-# 是否启动Network.framework (默认值: false)
-network-framework = false
-
-# INTERNET 测试 URL (使用网络诊断功能时访问的 URL)
-internet-test-url = http://bing.com/
-
-# 代理测速 URL (测试代理策略时的 URL)
-proxy-test-url = http://bing.com/
-
-# 测速超时 (秒)
-test-timeout = 5
-
-# 强制 TCP 连接为 HTTP 连接
-force-http-engine-hosts = api.joybj.com,api.alsend.com,api.whizzone.com,api.4shade.com,btrace.qq.com,log.kuwo.cn,g.koowo.com
-
-# 返回真实 IP
-# always-real-ip = *.apple.com
-
-# 劫持其它 DNS 服务器
-# hijack-dns = 8.8.8.8:53
-
-# 绕过特定 IP 范围
-# tun-excluded-routes = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12
-
-# 包含特定 IP 范围
-# tun-included-routes = 192.168.1.12/32
-
-
-
-
-#===============================================================================
-
-# 该段定义抓取流量的过滤
-[Replica]
-
-# 隐藏所有发往 *.Apple.com 和 *.icloud.com 的请求（该选项只是在抓取结果中隐藏了请求）
-hide-apple-request = true
-
-# 隐藏Crashlytics请求
-hide-crashlytics-request = true
-
-# 隐藏UDP会话（默认值: false）
-hide-udp = false
-
-# 使用关键词过滤器（默认值: false）
-use-keyword-filter = false
-
-
-
-
-
-
-
-
-
-
-
-
-#===============================================================================
-
-# 重定向 HTTP 请求或者篡改请求 Header
-[Header Rewrite]
-
-// 百度
-^*.bdimg.com header-del Referer
-
-// 腾讯
-^*.qpic.cn header-replace User-Agent WeChat/6.5.22.32 CFNetwork/889.9 Darwin/17.2.0
-^*.qpic.cn header-del Referer
-
-// 网易
-^*.ph.126.net header-del Referer
-
-// 知乎
-^*.zhimg.com header-del Referer
-
-// 中文业界资讯站
-^*.cnbetacdn.com header-del Referer
-
-// 至顶网
-^*.zhiding.cn header-del Referer
-
-// C114通信网
-^*.c114.com.cn header-del Referer
-
-// 笔趣阁
-^https?://www.biquge.com.tw header-del Cookie
-
-// 知乎
-^https?://www.zhihu.com/question/ header-replace User-Agent Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.45 Safari/537.36
-
-
-
-
-
+[Proxy]
+# 自行修改服务器地址、端口、用户名、密码
+tokyo = http,13.115.178.3,443,username,password,tls=true
+🇸🇬SG = custom,1.2.3.4,443,chacha20,password,http://abc.com/ss.module,ota=true
+🇯🇵JP = http,1.2.3.4,443,username,password,tls=true
+🇺🇸US = http,1.2.3.4,443,username,password,tls=true
+[Proxy Group]
+Auto = url-test,🇭🇰HK,🇸🇬SG,🇯🇵JP,url = http://www.gstatic.com/generate_204
+Scene = ssid, default = Auto, cellular = 🇯🇵JP, "MOTO-3347" = 🇭🇰HK
+Proxy = select, Auto,Scene, 🇺🇸US
+[Rule]
+# 规则部分请参照范例补充完善，此处仅示意
+DOMAIN-KEYWORD,umeng.co,REJECT
+DOMAIN-KEYWORD,google,Proxy,force-remote-dns
+GEOIP,CN,DIRECT
+FINAL,Proxy
+[URL Rewrite]
+^http://www.google.cn http://www.google.com.sg header
 
 
 #===============================================================================
@@ -195,20 +48,3 @@ skip-server-cert-verify = true
 
 # 是否用于TCP连接
 tcp-connection = false
-
-
-# 主机名
-hostname = app.stoneread.com, api.mh.163.com, *.uve.weibo.com, app.bilibili.com, api.bilibili.com, i.weiread.qq.com, api.rr.tv, raw.githubusercontent.com, googlevideo.com, *.googlevideo.com, github.com, gist.github.com, shimo.im, www.baidu.com, *.zymk.cn, *.cnbetacdn.com, *.doubanio.com, *.iydsj.com, *.pstatp.com, *.ydstatic.com, *.youtube.com, 101.201.62.22, 113.105.222.132, 113.96.109.*, 118.178.214.118, 121.14.89.216, 121.9.212.178, 14.21.76.30, 183.232.237.194, 183.232.246.225, 183.60.159.227, 59.37.96.220, 789.kakamobi.cn, a.applovin.com, aarkissltrial.secure2.footprint.net, acs.m.taobao.com, activity2.api.ofo.com, adm.10jqka.com.cn, adproxy.autohome.com.cn, afd.baidu.com, api.app.vhall.com, api.chelaile.net.cn, api.douban.com, api.feng.com, api.fengshows.com, api.gotokeep.com, api.huomao.com, api.jr.mi.com, api.k.sohu.com, api.kkmh.com, api.laifeng.com, api.m.jd.com, api.m.mi.com, api.mddcloud.com.cn, api.smzdm.com, api.tv.sohu.com, api.weibo.cn, api.xiachufang.com, api.zhihu.com, api5.futunn.com, api-mifit.huami.com, api-mifit-cn.huami.com, app.10086.cn, app.m.zj.chinamobile.com, app.wy.guahao.com, app2.autoimg.cn, appsdk.soku.com, atrace.chelaile.net.cn, c.m.163.com, capi.douyucdn.cn, capi.mwee.cn, cdn.kuaidi100.com, cdn.moji.com, classbox2.kechenggezi.com, client.mail.163.com, connect.facebook.net, consumer.fcbox.com, creatives.ftimg.net, d.1qianbao.com, daoyu.sdo.com, dapis.mting.info, dl.app.gtja.com, dongfeng.alicdn.com, dsp-impr2.youdao.com, e.dangdang.com, erebor.douban.com, fm.fenqile.com, frodo.douban.com, fuss10.elemecdn.com, g1.163.com, gorgon.youdao.com, hm.xiaomi.com, hui.sohu.com, huichuan.sm.cn, i1.hoopchina.com.cn, iface.iqiyi.com, iface2.iqiyi.com, img.jiemian.com, img.zuoyebang.cc, img01.10101111cdn.com, img1.126.net, img1.doubanio.com, img3.doubanio.com, impservice.dictapp.youdao.com, impservice.youdao.com, interface.music.163.com, ios.wps.cn, kano.guahao.cn, lf.snssdk.com, lives.l.qq.com, m.aty.sohu.com, m.client.10010.com, m.ibuscloud.com, m.yap.yahoo.com, m5.amap.com, ma.ofo.com, mage.if.qidian.com, mapi.appvipshop.com, mbl.56.com, mimg.127.net, mlife.cmbchina.com, mmg.aty.sohu.com, mmgr.gtimg.com, mp.weixin.qq.com, ms.jr.jd.com, nex.163.com, oimagea4.ydstatic.com, oimagec2.ydstatic.com, p.kuaidi100.com, p1.music.126.net, pic.k.sohu.com, pic1.chelaile.net.cn, pic1cdn.cmbchina.com, pic2.zhimg.com, r.inews.qq.com, resource.cmbchina.com, ress.dxpmedia.com, rm.aarki.net, rtbapi.douyucdn.cn, service.4gtv.tv, smkmp.96225.com, sso.ifanr.com, static.api.m.panda.tv, static1.keepcdn.com, staticlive.douyucdn.cn, storage.wax.weibo.com, supportda.ofo.com, ups.youku.com, wapwenku.baidu.com, wenku.baidu.com, www.facebook.com, www.ft.com, www.oschina.net, www.zhihu.com, youtubei.googleapis.com, api-163.biliapi.net, api.gkaorlz.com, mjappaz.yefu365.com, aweme*.snssdk.com, api.amemv.com, api*.musical.ly, api*.tiktokv.com, api.huoshan.com, getuserinfo.321mh.com, i.weread.qq.com, mapi.weibo.com, m.poizon.com, ctrl.playcvn.com, api2.gkaorlz.com, *.api.vcinema.cn, ios.xiaoxiaoapps.com, *.qidian.com, nmb.fastmirror.org, *.115.com, ??.snssdk.com, p.doras.api.vcinema.cn, ios.prod.ftl.netflix.com, p.du.163.com, ios.fuliapps.com, vsco.co, api.vnision.com, pan.baidu.com, ss0.bdstatic.com, bd.4008109966.net, sp.kaola.com, *.snssdk.com, apple.fuliapps.com, ccsp-egmas.sf-express.com, *.dxy.cn, newdrugs.dxy.cn, app101.avictown.cc, account.wps.cn, www.luqijianggushi.com, u.kanghuayun.com, api.gyrosco.pe, api1.dobenge.cn, oauth.secure.pixiv.net, app-api.pixiv.net, api.mvmtv.com, 
-
-
-
-
-
-
-
-
-
-
-
-
-
